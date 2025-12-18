@@ -14,7 +14,7 @@ const Header = ({ onMenuClick }: HeaderProps) => {
           </div>
           <div>
             <h1 className="text-xl sm:text-2xl font-bold text-white tracking-wider">
-              STUDIO 3D
+              MM Studio Magic Motion Studio
             </h1>
             <p className="text-xs text-sky-400 tracking-widest">ANIMATION</p>
           </div>

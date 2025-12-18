@@ -94,7 +94,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sky-400/20">
                 <Mail size={20} />
               </div>
-              <span className="text-sm">studio@animation3d.com</span>
+              <span className="text-sm">magicmotionstudiomm@gmail.com</span>
             </a>
 
             <div className="flex gap-4">

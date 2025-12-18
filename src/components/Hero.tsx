@@ -69,10 +69,12 @@ const Hero = () => {
           </h1>
 
           <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-12">
-            Transform your ideas into cinematic 3D experiences using next-generation animation technology
+           Magic Motion Studio is a visionary new startup at the forefront of digital content 
+creation, pioneering a "Real-Time Converged Production Ecosystem" that unifies 
+high-end animation, visual effects (VFX), and interactive gaming development. 
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          {/* <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button className="relative px-10 py-4 font-bold bg-sky-400 text-black rounded-xl overflow-hidden group hover:scale-110 transition-all duration-300 shadow-xl">
               <span className="relative z-10 flex items-center gap-2">
                 <Play size={20} />
@@ -85,7 +87,7 @@ const Hero = () => {
               <span className="relative z-10">VIEW PORTFOLIO</span>
               <span className="absolute inset-0 bg-sky-400 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300" />
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
 

@@ -28,9 +28,10 @@ const Footer = () => {
       >
         {/* ===== TOP CONTENT ===== */}
         <div className="flex flex-col gap-16">
-          
-          {/* TEXT + EMAIL */}
+
+          {/* TEXT + HOURS */}
           <div className="flex flex-col lg:flex-row items-start justify-between gap-12">
+            {/* LEFT */}
             <div className="max-w-xl">
               <p className="footer-tagline">
                 Thousands of professional artists at your reach
@@ -43,12 +44,22 @@ const Footer = () => {
                 MAGICMOTIONSTUDIOMM@GMAIL.COM
               </a>
             </div>
+
+            {/* RIGHT – BUSINESS HOURS */}
+            <div className="business-hours">
+              <h4>Business Hours</h4>
+              <ul>
+                <li><span>Mon – Fri</span><span>9:00 AM – 7:30 PM</span></li>
+                <li><span>Saturday</span><span className="closed">Week-Off</span></li>
+                <li><span>Sunday</span><span className="closed">Week-Off</span></li>
+              </ul>
+            </div>
           </div>
 
           {/* DIVIDER */}
           <div className="footer-divider" />
 
-          {/* COPYRIGHT – ALWAYS BELOW */}
+          {/* COPYRIGHT */}
           <div className="footer-bottom">
             © 2024 Studio 3D. All rights reserved. <span>|</span> Crafted with passion for animation
           </div>
@@ -66,7 +77,7 @@ const Footer = () => {
           animation: fadeUp 2.5s ease-in-out infinite alternate;
         }
 
-        /* EMAIL – FULL RESPONSIVE */
+        /* EMAIL */
         .footer-email {
           display: block;
           max-width: 100%;
@@ -106,6 +117,45 @@ const Footer = () => {
           width: 100%;
         }
 
+        /* BUSINESS HOURS */
+        .business-hours {
+          min-width: 260px;
+          animation: fadeUp 2.5s ease-in-out infinite alternate;
+        }
+
+        .business-hours h4 {
+          font-size: 1rem;
+          letter-spacing: 0.15em;
+          margin-bottom: 1rem;
+          text-transform: uppercase;
+          color: #e5e7eb;
+        }
+
+        .business-hours ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+
+        .business-hours li {
+          display: flex;
+          justify-content: space-between;
+          gap: 1rem;
+          font-size: 0.9rem;
+          color: #9ca3af;
+          padding: 0.4rem 0;
+          border-bottom: 1px dashed rgba(255,255,255,0.1);
+        }
+
+        .business-hours li span:first-child {
+          letter-spacing: 0.05em;
+        }
+
+        .business-hours .closed {
+          color: #f87171;
+          font-weight: 600;
+        }
+
         /* DIVIDER */
         .footer-divider {
           width: 100%;
@@ -118,7 +168,7 @@ const Footer = () => {
           );
         }
 
-        /* COPYRIGHT BOTTOM */
+        /* COPYRIGHT */
         .footer-bottom {
           text-align: center;
           font-size: 0.85rem;
@@ -144,14 +194,17 @@ const Footer = () => {
           }
         }
 
-        /* MOBILE CENTERING */
+        /* MOBILE */
         @media (max-width: 640px) {
-          .footer-email {
+          .footer-email,
+          .footer-tagline,
+          .business-hours {
             text-align: center;
           }
 
-          .footer-tagline {
-            text-align: center;
+          .business-hours li {
+            justify-content: center;
+            gap: 0.5rem;
           }
         }
       `}</style>
