@@ -16,42 +16,12 @@ const images = [
    GALLERY
 ========================= */
 const Gallery = () => {
-  const [scrollY, setScrollY] = useState(0);
-  const [autoX, setAutoX] = useState(0);
-  const isMobile =
-    typeof window !== "undefined" && window.innerWidth < 1024;
-
-  /* DESKTOP SCROLL */
-  useEffect(() => {
-    if (isMobile) return;
-    const onScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [isMobile]);
-
-  /* MOBILE AUTO SCROLL */
-  useEffect(() => {
-    if (!isMobile) return;
-    let raf: number;
-
-    const animate = () => {
-      setAutoX((p) => (p + 0.35) % 2500);
-      raf = requestAnimationFrame(animate);
-    };
-
-    raf = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(raf);
-  }, [isMobile]);
-
   return (
-    <section
-      id="gallery"
-      className="relative bg-black text-white overflow-hidden py-24"
-      style={{ perspective: "2000px" }}
-    >
+    <section className="relative bg-black text-white overflow-hidden">
+
       {/* BACKGROUND VIDEO */}
       <video
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        className="absolute inset-0 w-full h-full object-cover"
         autoPlay
         loop
         muted
@@ -63,91 +33,28 @@ const Gallery = () => {
         />
       </video>
 
-      <div className="absolute inset-0 bg-black/70 z-0" />
+      {/* DARK OVERLAY */}
+      <div className="absolute inset-0 bg-black/70" />
 
       {/* CONTENT */}
-      <div className="relative z-10">
-        <h2 className="text-center text-4xl sm:text-6xl font-extrabold mb-20 tracking-widest">
-          MM GALLERY
+      <div className="relative z-10 flex flex-col pt-32 pb-32">
+
+        {/* TITLE */}
+        <h2 className="text-center text-4xl sm:text-6xl font-extrabold tracking-widest mb-20">
+          MM <span className="text-sky-400">GALLERY</span>
         </h2>
 
-        {/* VIEWPORT (FIXES WHITE SPACE ISSUE) */}
-        <div className="gallery-viewport">
-          {/* ROW 1 */}
-          <div className="gallery-row-wrapper">
-            <div
-              className="gallery-row"
-              style={{
-                transform: isMobile
-                  ? `translateX(-${autoX}px)`
-                  : `translateX(-${scrollY * 0.35}px)`,
-              }}
-            >
-              {[...images, ...images, ...images].map((img, i) => (
-                <GalleryCard
-                  key={`r1-${i}`}
-                  src={img.src}
-                  title={img.title}
-                  scrollY={scrollY}
-                />
-              ))}
-            </div>
-          </div>
+        {/* ROWS */}
+        <div className="space-y-16">
 
-          {/* ROW 2 */}
-          <div className="gallery-row-wrapper">
-            <div
-              className="gallery-row"
-              style={{
-                transform: isMobile
-                  ? `translateX(${autoX}px)`
-                  : `translateX(${scrollY * 0.35}px)`,
-              }}
-            >
-              {[...images, ...images, ...images].map((img, i) => (
-                <GalleryCard
-                  key={`r2-${i}`}
-                  src={img.src}
-                  title={img.title}
-                  scrollY={scrollY}
-                />
-              ))}
-            </div>
-          </div>
+          {/* ROW 1 */}
+          <GalleryRow speed={0.45} />
+
+          {/* ROW 3 (DENSE) */}
+          <GalleryRow speed={0.25} dense />
+
         </div>
       </div>
-
-      {/* GLOBAL STYLES */}
-      <style>{`
-        .gallery-viewport {
-          display: flex;
-          flex-direction: column;
-          gap: 5rem;
-          overflow: hidden;
-        }
-
-        /* LOCK HEIGHT – PREVENTS DEAD SPACE */
-        .gallery-row-wrapper {
-          height: 460px;
-          overflow: hidden;
-          position: relative;
-        }
-
-        .gallery-row {
-          display: flex;
-          gap: 3rem;
-          margin-left: -3rem;
-          width: max-content;
-          will-change: transform;
-          transition: transform 0.12s linear;
-        }
-
-        @media (max-width: 768px) {
-          .gallery-row-wrapper {
-            height: 340px;
-          }
-        }
-      `}</style>
     </section>
   );
 };
@@ -155,30 +62,73 @@ const Gallery = () => {
 export default Gallery;
 
 /* =========================
-   GALLERY CARD
+   GALLERY ROW
+========================= */
+const GalleryRow = ({
+  speed,
+  dense = false,
+}: {
+  speed: number;
+  dense?: boolean;
+}) => {
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => setOffset(window.scrollY * speed);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [speed]);
+
+  return (
+    <div className="overflow-hidden">
+      <div
+        className={`flex ${dense ? "gap-10" : "gap-16"} px-6 will-change-transform`}
+        style={{ transform: `translateX(-${offset}px)` }}
+      >
+        {[...images, ...images, ...images].map((img, i) => (
+          <GalleryCard
+            key={i}
+            src={img.src}
+            title={img.title}
+            dense={dense}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/* =========================
+   GALLERY CARD (ADVANCED 3D)
 ========================= */
 const GalleryCard = ({
   src,
   title,
-  scrollY,
+  dense,
 }: {
   src: string;
   title: string;
-  scrollY: number;
+  dense?: boolean;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const glareRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
   const onMove = (e: React.MouseEvent) => {
-    if (!ref.current) return;
+    if (!ref.current || !glareRef.current) return;
+
     const r = ref.current.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - 0.5;
-    const y = (e.clientY - r.top) / r.height - 0.5;
+    const x = (e.clientX - r.left) / r.width;
+    const y = (e.clientY - r.top) / r.height;
 
     setTilt({
-      x: y * 18,
-      y: x * 18,
+      x: (y - 0.5) * 18,
+      y: (x - 0.5) * 18,
     });
+
+    glareRef.current.style.transform = `
+      translate(${x * 100}%, ${y * 100}%)
+    `;
   };
 
   return (
@@ -186,102 +136,55 @@ const GalleryCard = ({
       ref={ref}
       onMouseMove={onMove}
       onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-      className="gallery-card"
       style={{
         transform: `
+          perspective(1600px)
           rotateX(${tilt.x}deg)
           rotateY(${tilt.y}deg)
-          translateY(${Math.sin(scrollY * 0.002) * 8}px)
         `,
       }}
+      className={`
+        group relative shrink-0 overflow-hidden rounded-3xl bg-black
+        ${dense ? "w-[220px] h-[300px]" : "w-[300px] h-[420px]"}
+        transform-gpu transition-all duration-500 ease-out
+        hover:scale-105
+      `}
     >
-      <img src={src} alt={title} />
+      {/* IMAGE */}
+      <img
+        src={src}
+        alt={title}
+        className="absolute inset-0 w-full h-full object-cover
+                   scale-110 transition-transform duration-700
+                   group-hover:scale-125"
+      />
+
+      {/* GLARE */}
+      <div
+        ref={glareRef}
+        className="pointer-events-none absolute inset-0
+                   bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.25),transparent_60%)]
+                   opacity-0 group-hover:opacity-100
+                   transition-opacity duration-500"
+      />
+
+      {/* GRADIENT */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
       {/* TITLE */}
-      <div className="title-panel">
-        <span>{title}</span>
+      <div className="absolute bottom-0 w-full px-6 py-4
+                      translate-y-full group-hover:translate-y-0
+                      transition-transform duration-500">
+        <p className="text-xs tracking-[0.35em] uppercase text-white
+                      drop-shadow-[0_0_16px_rgba(56,189,248,1)]">
+          {title}
+        </p>
       </div>
 
       {/* EDGE GLOW */}
-      <div className="edge-glow" />
-
-      <style>{`
-        .gallery-card {
-          position: relative;
-          width: 300px;
-          height: 420px;
-          border-radius: 22px;
-          overflow: hidden;
-          background: #000;
-          transform-style: preserve-3d;
-          transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
-        }
-
-        .gallery-card img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transform: translateZ(70px) scale(1.1);
-        }
-
-        .title-panel {
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          padding: 1.3rem 1.6rem;
-          background: linear-gradient(
-            to top,
-            rgba(0,0,0,0.95),
-            rgba(0,0,0,0.6),
-            transparent
-          );
-          transform: translateZ(90px) translateY(100%);
-          transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
-          pointer-events: none;
-        }
-
-        .title-panel span {
-          font-size: 0.9rem;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: white;
-          text-shadow:
-            0 0 12px rgba(56,189,248,0.7),
-            0 0 32px rgba(56,189,248,0.35);
-        }
-
-        .edge-glow {
-          position: absolute;
-          inset: 0;
-          border-radius: 22px;
-          box-shadow:
-            inset 0 0 0 1px rgba(255,255,255,0.07),
-            0 0 40px rgba(56,189,248,0.18);
-          opacity: 0;
-          transition: opacity 0.4s ease;
-          pointer-events: none;
-        }
-
-        .gallery-card:hover .title-panel {
-          transform: translateZ(90px) translateY(0);
-        }
-
-        .gallery-card:hover .edge-glow {
-          opacity: 1;
-        }
-
-        @media (max-width: 768px) {
-          .gallery-card {
-            width: 220px;
-            height: 320px;
-          }
-
-          .title-panel {
-            display: none;
-          }
-        }
-      `}</style>
+      <div className="absolute inset-0 rounded-3xl opacity-0
+                      group-hover:opacity-100 transition-opacity duration-500
+                      shadow-[0_0_90px_rgba(56,189,248,0.5)]" />
     </div>
   );
 };
