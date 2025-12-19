@@ -88,11 +88,27 @@ future of visual storytelling`,
       <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-6xl font-bold mb-4">
-            MM <span className="text-sky-400">Strategy</span>
-          </h2>
-        </div>
+       <div className="max-w-5xl mx-auto text-center">
+
+    {/* DESCRIPTION TEXT */}
+    <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed mb-10">
+      Magic Motion Studio is a visionary new startup at the forefront of digital
+      content creation, pioneering a{" "}
+      <span className="text-sky-400 font-medium">
+        Real-Time Converged Production Ecosystem
+      </span>{" "}
+      that unifies high-end animation, visual effects (VFX), and interactive
+      gaming development.
+    </p>
+
+    {/* STRATEGY HEADING */}
+    <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-wide text-white">
+      MM <span className="text-sky-400">Strategy</span>
+    </h2>
+
+    {/* UNDERLINE ACCENT */}
+    <div className="mt-6 w-24 h-1 bg-sky-400 mx-auto rounded-full" />
+  </div>
 
         {/* 2×2 RESPONSIVE GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">

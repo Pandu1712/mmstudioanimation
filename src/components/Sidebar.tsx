@@ -15,16 +15,17 @@ interface SidebarProps {
 const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const navLinks = [
     { name: "Home", href: "#home" },
-    { name: "What Is IP", href: "#service" },
+    { name: "Our IP", href: "#service" },
     { name: "MM-Vision", href: "#portfolio" },
-    { name: "About", href: "#about" },
+    { name: "About", href: "#footer" },
+    {name:"Contact",href:"contact"}
   ];
 
   const socialLinks = [
     { icon: Facebook, href: "#", label: "Facebook" },
     { icon: Twitter, href: "#", label: "Twitter" },
     { icon: Instagram, href: "#", label: "Instagram" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
+    { icon: Linkedin, href: " https://www.linkedin.com/company/mm-studio7/?viewAsMember=true", label: "LinkedIn" },
   ];
 
   return (

@@ -12,6 +12,8 @@ import Gallery from "./components/Gallery"
 import { useCursorGlow } from "./hooks/useCursorGlow";
 import { useScrollAnimation } from "./hooks/useScrollAnimation";
 import Services2 from "./components/Services2";
+import Contact from "./components/Contact";
+
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -42,6 +44,7 @@ function App() {
         <Portfolio />
         <Services2/>
         <About />
+        <Contact/>
       </main>
 
       {/* FOOTER */}

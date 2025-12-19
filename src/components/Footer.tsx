@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Instagram, Youtube, Linkedin, Twitter } from "lucide-react";
 
 const Footer = () => {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -15,7 +16,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer
+    <footer id="footer"
       className="relative bg-black text-white overflow-hidden"
       style={{ perspective: "1600px" }}
     >
@@ -26,11 +27,11 @@ const Footer = () => {
           transition: "transform 0.3s ease-out",
         }}
       >
-        {/* ===== TOP CONTENT ===== */}
         <div className="flex flex-col gap-16">
 
-          {/* TEXT + HOURS */}
+          {/* ================= TOP ================= */}
           <div className="flex flex-col lg:flex-row items-start justify-between gap-12">
+
             {/* LEFT */}
             <div className="max-w-xl">
               <p className="footer-tagline">
@@ -43,9 +44,24 @@ const Footer = () => {
               >
                 MAGICMOTIONSTUDIOMM@GMAIL.COM
               </a>
+              <a
+  href="tel:+919121045950"
+  className="footer-email"
+>
+  +91 91210 45950
+</a>
+
+
+              {/* SOCIAL ICONS */}
+              <div className="footer-socials">
+                <a href="#" aria-label="Instagram"><Instagram /></a>
+                <a href="#" aria-label="YouTube"><Youtube /></a>
+                <a href="https://www.linkedin.com/company/mm-studio7/?viewAsMember=true" aria-label="LinkedIn"><Linkedin /></a>
+                <a href="#" aria-label="Twitter"><Twitter /></a>
+              </div>
             </div>
 
-            {/* RIGHT – BUSINESS HOURS */}
+            {/* RIGHT */}
             <div className="business-hours">
               <h4>Business Hours</h4>
               <ul>
@@ -59,16 +75,17 @@ const Footer = () => {
           {/* DIVIDER */}
           <div className="footer-divider" />
 
-          {/* COPYRIGHT */}
+          {/* BOTTOM */}
           <div className="footer-bottom">
-            © 2024 Studio 3D. All rights reserved. <span>|</span> Crafted with passion for animation
+            © 2025 MM Studio Magic Motion Studio. All rights reserved
+            <span>|</span>
+            Crafted with passion for animation
           </div>
         </div>
       </div>
 
-      {/* ===== STYLES ===== */}
+      {/* ================= STYLES ================= */}
       <style>{`
-        /* TAGLINE */
         .footer-tagline {
           font-size: clamp(0.95rem, 2vw, 1.1rem);
           color: #d1d5db;
@@ -77,47 +94,57 @@ const Footer = () => {
           animation: fadeUp 2.5s ease-in-out infinite alternate;
         }
 
-        /* EMAIL */
         .footer-email {
-          display: block;
-          max-width: 100%;
-          font-size: clamp(1.6rem, 5vw, 3.6rem);
-          font-weight: 800;
-          letter-spacing: 0.06em;
-          line-height: 1.3;
+          display: inline-block;
+          font-size:20px;
+          font-weight: 900;
+          letter-spacing: 0.08em;
+          line-height: 1.25;
           word-break: break-all;
-          overflow-wrap: anywhere;
-          color: white;
-          position: relative;
-          transform-style: preserve-3d;
-          transition:
-            transform 0.6s cubic-bezier(0.16,1,0.3,1),
-            text-shadow 0.6s;
-        }
 
-        .footer-email::after {
-          content: "";
-          position: absolute;
-          left: 0;
-          bottom: -12px;
-          width: 0%;
-          height: 3px;
-          background: linear-gradient(90deg, #38bdf8, #2563eb);
-          transition: width 0.6s cubic-bezier(0.16,1,0.3,1);
+          background: linear-gradient(90deg, #ffffff, #38bdf8, #2563eb);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+
+          transform-style: preserve-3d;
+          transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), text-shadow 0.6s;
         }
 
         .footer-email:hover {
-          transform: translateZ(24px) rotateY(-10deg);
+          transform: translateZ(32px) rotateY(-12deg);
           text-shadow:
-            0 0 25px rgba(56,189,248,0.8),
-            0 0 70px rgba(56,189,248,1);
+            0 0 30px rgba(56,189,248,0.9),
+            0 0 90px rgba(37,99,235,1);
         }
 
-        .footer-email:hover::after {
-          width: 100%;
+        .footer-socials {
+          margin-top: 2.2rem;
+          display: flex;
+          gap: 1.4rem;
         }
 
-        /* BUSINESS HOURS */
+        .footer-socials a {
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          background: rgba(255,255,255,0.05);
+          color: #9ca3af;
+
+          transition: transform 0.4s ease, background 0.4s ease,
+                      color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .footer-socials a:hover {
+          transform: translateY(-4px) scale(1.08);
+          color: white;
+          background: linear-gradient(135deg, #38bdf8, #2563eb);
+          box-shadow: 0 10px 30px rgba(56,189,248,0.45);
+        }
+
         .business-hours {
           min-width: 260px;
           animation: fadeUp 2.5s ease-in-out infinite alternate;
@@ -140,23 +167,17 @@ const Footer = () => {
         .business-hours li {
           display: flex;
           justify-content: space-between;
-          gap: 1rem;
           font-size: 0.9rem;
           color: #9ca3af;
           padding: 0.4rem 0;
           border-bottom: 1px dashed rgba(255,255,255,0.1);
         }
 
-        .business-hours li span:first-child {
-          letter-spacing: 0.05em;
-        }
-
-        .business-hours .closed {
+        .closed {
           color: #f87171;
           font-weight: 600;
         }
 
-        /* DIVIDER */
         .footer-divider {
           width: 100%;
           height: 1px;
@@ -168,7 +189,6 @@ const Footer = () => {
           );
         }
 
-        /* COPYRIGHT */
         .footer-bottom {
           text-align: center;
           font-size: 0.85rem;
@@ -182,29 +202,25 @@ const Footer = () => {
           margin: 0 0.5rem;
         }
 
-        /* ANIMATION */
         @keyframes fadeUp {
-          from {
-            opacity: 0.85;
-            transform: translateY(2px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(-2px);
-          }
+          from { opacity: 0.85; transform: translateY(2px); }
+          to { opacity: 1; transform: translateY(-2px); }
         }
 
-        /* MOBILE */
         @media (max-width: 640px) {
-          .footer-email,
           .footer-tagline,
+          .footer-email,
           .business-hours {
             text-align: center;
           }
 
+          .footer-socials {
+            justify-content: center;
+          }
+
           .business-hours li {
             justify-content: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
           }
         }
       `}</style>

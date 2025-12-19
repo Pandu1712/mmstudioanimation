@@ -68,7 +68,7 @@ const Gallery = () => {
       {/* CONTENT */}
       <div className="relative z-10">
         <h2 className="text-center text-4xl sm:text-6xl font-extrabold mb-20 tracking-widest">
-          3D GALLERY
+          MM GALLERY
         </h2>
 
         {/* VIEWPORT (FIXES WHITE SPACE ISSUE) */}

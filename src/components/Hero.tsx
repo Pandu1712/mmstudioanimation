@@ -50,28 +50,25 @@ const Hero = () => {
           <h1 className="text-5xl sm:text-7xl lg:text-8xl font-extrabold leading-tight mb-8 space-y-4">
             {/* CREATE */}
             <span className="block perspective-text">
-              <span className="hero-word text-white">CREATE</span>
+              <span className="hero-word text-white">"The Art of Crafting</span>
             </span>
-
-            {/* AMAZING */}
             <span className="block perspective-text">
               <span className="hero-word amazing-text">
-                AMAZING
+               Imagination
               </span>
             </span>
 
             {/* 3D WORLDS */}
             <span className="block perspective-text">
               <span className="hero-word text-white">
-                3D WORLDS
+               into Living World"
+            {/* AMAZING */}
               </span>
             </span>
           </h1>
 
           <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-12">
-           Magic Motion Studio is a visionary new startup at the forefront of digital content 
-creation, pioneering a "Real-Time Converged Production Ecosystem" that unifies 
-high-end animation, visual effects (VFX), and interactive gaming development. 
+           "We Dream it," We Animate It.
           </p>
 
           {/* <div className="flex flex-col sm:flex-row gap-6 justify-center">
