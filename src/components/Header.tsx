@@ -63,7 +63,7 @@ const Header = ({ onMenuClick }: HeaderProps) => {
                 MM Studio
               </h1>
               <p className="text-xs text-sky-300 tracking-widest">
-                MM Studio Magic Motion Studio
+              Magic Motion Studio
               </p>
             </div>
           )}

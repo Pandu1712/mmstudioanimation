@@ -77,7 +77,7 @@ const Footer = () => {
 
           {/* BOTTOM */}
           <div className="footer-bottom">
-            © 2025 MM Studio Magic Motion Studio. All rights reserved
+            © 2025 Magic Motion Studio. All rights reserved
             <span>|</span>
             Crafted with passion for animation
           </div>
