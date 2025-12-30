@@ -173,7 +173,7 @@ ${form.message}
           <iframe
             title="Google Map"
             className="w-full h-full grayscale hover:grayscale-0 transition duration-500"
-            src="https://www.google.com/maps?q=Hyderabad%20India&output=embed"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.20564483699!2d80.564089!3d16.414379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35f700314d2391%3A0x4c94e829afb8cfc9!2sAPVAGA%20(Andhra%20Pradesh%20Vfx%20Animation%20Gaming%20Association)!5e0!3m2!1sen!2sin!4v1767062761964!5m2!1sen!2sin"
             loading="lazy"
           />
         </div>
