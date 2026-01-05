@@ -60,10 +60,10 @@ const Header = ({ onMenuClick }: HeaderProps) => {
           {!collapsed && (
             <div className="transition-opacity duration-500">
               <h1 className="text-xl sm:text-2xl font-bold text-white tracking-wider">
-                MM Studio
+                MMS
               </h1>
               <p className="text-xs text-sky-300 tracking-widest">
-              Magic Motion Studio
+              ANIMATION STUDIO
               </p>
             </div>
           )}
